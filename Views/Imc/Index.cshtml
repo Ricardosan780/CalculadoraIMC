@@ -1,0 +1,40 @@
+@model CalculadoraIMC.Models.ImcModel
+
+@{
+    ViewData["Title"] = "Cálculo de IMC";
+}
+
+<h2>Calculadora de IMC (Server Side)</h2>
+<br />
+
+<form asp-action="Index" method="post">
+    
+    <label asp-for="Peso">Peso (kg) - Ex: 75,5</label>
+    <br />
+    <input asp-for="Peso" type="text" size="15" />
+    <br />
+    <span asp-validation-for="Peso" style="color: red;"></span>
+    <br /><br />
+
+    <label asp-for="Altura">Altura (m) - Ex: 1,75</label>
+    <br />
+    <input asp-for="Altura" type="text" size="15" />
+    <br />
+    <span asp-validation-for="Altura" style="color: red;"></span>
+    <br /><br />
+
+    <button type="submit" style="font-weight: bold; padding: 6px 20px;">Calcular IMC</button>
+
+</form>
+
+<br /><br />
+
+<!-- Se o resultado foi calculado, exibe o bloco HTML -->
+@if (Model != null && Model.ResultadoImc > 0)
+{
+    <div style="background-color: #f8f9fa; padding: 15px; border-left: 4px solid #007bff; width: 300px;">
+        <h4>Resultado do Cálculo:</h4>
+        <p><strong>Seu IMC:</strong> @Model.ResultadoImc.ToString("F2")</p>
+        <p><strong>Classificação:</strong> @Model.Classificacao</p>
+    </div>
+}
